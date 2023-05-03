@@ -1,39 +1,59 @@
-# my-component CfHighlander Component
-
-![cftest](https://github.com/theonestack/hl-component-my-component/actions/workflows/rspec.yaml/badge.svg)
-
-**_NOTE:_**  Rename and replace my-component with the name of your component
-
-TODO: Add Description
-
-```bash
-kurgan add my-component
-```
-
-## Requirements
-
+# efs-access-point CfHighlander component
 ## Parameters
 
 | Name | Use | Default | Global | Type | Allowed Values |
 | ---- | --- | ------- | ------ | ---- | -------------- |
 | EnvironmentName | Tagging | dev | true | string
 | EnvironmentType | Tagging | development | true | string | ['development','production']
-
-## Configuration
-
-TODO: Add configuration examples
-
-**Other Config Options**
-
-See the test configs in the [tests directory](tests/)
+| FileSystemId | File System ID to connect to | None | false | AWS::EFS::FileSystem::Id
 
 ## Outputs/Exports
 
 | Name | Value | Exported |
 | ---- | ----- | -------- |
+| {ap_name}AccessPoint | AccessPoint name
+
+## Example Configuration
+### Highlander
+```
+  Component name: 'efsaccesspoint', template: 'efs-access-point' do
+    parameter name: 'FileSystemId', value: cfout('efs', 'FileSystemId')
+  end
+```
+### EFS Access Point Configuration
+```
+access_points:
+  -
+    name: AppData
+    root_directory:
+      CreationInfo:
+        OwnerGid: '33'
+        OwnerUid: '33'
+        Permissions: '774'
+      Path: /app_data
+  -
+    name: AppLogs
+    root_directory:
+      CreationInfo:
+        OwnerGid: '33'
+        OwnerUid: '33'
+        Permissions: '774'
+      Path: /app_logs
+```
+
+## Configuration
 
 
-## Development
+**Extra Tags**
+Optionally add extra tags from the config file.
+```yaml
+extra_tags:
+    key: value
+```
+
+## Cfhighlander Setup
+
+install cfhighlander [gem](https://github.com/theonestack/cfhighlander)
 
 ```bash
 gem install cfhighlander
@@ -44,39 +64,10 @@ or via docker
 ```bash
 docker pull theonestack/cfhighlander
 ```
+## Testing Components
 
-### Testing
-
-Generate cftest
-
-```bash
-kurgan test example
-```
-
-Run cftest
+Running the tests
 
 ```bash
-cfhighlander cftest -t tests/example.test.yaml
-```
-
-or run all tests
-
-```bash
-cfhighlander cftest
-```
-
-Generate spec tests
-
-```bash
-kurgan test example --type spec
-```
-
-run spec tests
-
-```bash
-gem install rspec
-```
-
-```bash
-rspec
+cfhighlander cftest efs-access-point
 ```
