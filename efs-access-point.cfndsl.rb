@@ -1,15 +1,5 @@
 CloudFormation do
 
-  tags, lifecycles = Array.new(2){[]}
-  tags.push(
-    { Key: 'Environment', Value: Ref(:EnvironmentName) },
-    { Key: 'EnvironmentType', Value: Ref(:EnvironmentType) },
-    { Key: 'Name', Value: FnSub("${EnvironmentName}-#{external_parameters[:component_name]}")}
-  )
-
-  extra_tags = external_parameters.fetch(:extra_tags, {})
-  tags.push(*extra_tags.map {|k,v| {Key: k, Value: FnSub(v)}}).uniq! { |h| h[:Key] }
-
   access_points = external_parameters.fetch(:access_points, {})
 
   unless access_points.empty?

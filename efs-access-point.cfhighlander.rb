@@ -5,6 +5,6 @@ CfhighlanderTemplate do
   Parameters do
     ComponentParam 'EnvironmentName', 'dev', isGlobal: true
     ComponentParam 'EnvironmentType', 'development', allowedValues: ['development','production'], isGlobal: true
-    ComponentParam 'FileSystemId', type: 'AWS::EFS::FileSystem::Id'
+    ComponentParam 'FileSystemId', ''
   end
 end
