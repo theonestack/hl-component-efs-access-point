@@ -5,7 +5,7 @@
 | ---- | --- | ------- | ------ | ---- | -------------- |
 | EnvironmentName | Tagging | dev | true | string
 | EnvironmentType | Tagging | development | true | string | ['development','production']
-| FileSystemId | File System ID to connect to | None | false | AWS::EFS::FileSystem::Id
+| FileSystemId | File System ID to connect to | None | false | string
 
 ## Outputs/Exports
 
