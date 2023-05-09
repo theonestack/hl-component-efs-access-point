@@ -1,0 +1,13 @@
+# Create one or more access points
+#access_points:
+#  -
+#    name: accessPointName
+#    root_directory:
+#      CreationInfo:
+#        OwnerGid: '33'
+#        OwnerUid: '33'
+#        Permissions: '755'
+#      Path: /the/path
+#    posix_user:
+#      Gid: '33'
+#      Uid: '33'
